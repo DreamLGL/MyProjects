@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        div#box {
+            width: 100%;
+            height: 100%;
+            color: darkgray;
+        }
+
+        .red {
+            background-color: red;
+        }
+
+        .blue {
+            background-color: blue;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <!--  class属性  -->
+    <div id="box" :class="{red:isRed,blue:!isRed}" class="red">
+        我是盒子
+    </div>
+    <button @click="isRed=!isRed">切换颜色</button>
+    <hr>
+    <!--  计算属性  -->
+    <h1 v-text="birth"></h1>
+    <hr>
+    <!--  watch  -->
+    <input type="text" v-model="num">
+    <h1 v-text="'num:'+num"></h1>
+</div>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    const app = new Vue({
+        el: "#app",//element,vue作用的标签
+        data: {
+            isRed: true,
+            birthday: 1529032123201, //毫秒值
+            num: 1,
+            person:{
+                name:"lgl",
+                age:21
+            }
+        },
+        computed: {
+            birth() {
+                const day = new Date(this.birthday);
+                return day.getFullYear() + "年" + (day.getMonth() + 1) + "月" + day.getDay() + "日";
+            }
+        },
+        watch:{
+            num(arg1,arg2){
+                console.log(arg1);
+                console.log(arg2);
+            },
+            person:{
+                deep:true,
+                handler(val){
+                   console.log(val.age);
+                }
+            }
+        }
+    });
+</script>
+</body>
+</html>

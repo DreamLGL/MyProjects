@@ -1,0 +1,29 @@
+## 端口号
+server:
+  port: 8084
+## 服务名称
+spring:
+  application:
+    name: goods-web
+  ## 模板缓存
+  thymeleaf:
+    cache: false
+  rabbitmq: # RabbitMQ 配置
+    host: 192.168.3.34 # IP地址
+    virtual-host: /leyou # 虚拟路径
+    username: leyou # 用户名
+    password: leyou # 密码
+## eureka
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:10086/eureka
+    registry-fetch-interval-seconds: 5 # 拉取服务的时间
+  instance:
+    lease-renewal-interval-in-seconds: 5 # 心跳时间
+    lease-expiration-duration-in-seconds: 15 #过期时间
+## jwt配置
+leyou:
+  jwt:
+    pubKeyPath: /Users/liguoliang/Desktop/test/rsa.pub # 公钥地址
+    cookieName: LY_TOKEN

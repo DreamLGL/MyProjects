@@ -1,0 +1,51 @@
+## 端口号
+server:
+  port: 10010
+## 服务名称
+spring:
+  application:
+    name: leyou-gateway
+## eureka注册中心
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:10086/eureka
+    registry-fetch-interval-seconds: 5 # 刷新服务列表间隔时间
+## zuul网关
+zuul:
+  prefix: /api # 统一前缀
+  routes:
+    item-service: /item/** # 路由到商品的微服务
+    search-service: /search/** # 路由到搜索的微服务
+    user-service: /user/** # 路由到用户的微服务
+    auth-service: /auth/** # 路由到认证中心
+    cart-service: /cart/** # 路由到购物车
+    order-service: /order/** # 路由到订单
+  add-host-header: true # 网关转发途中携带域名/地址信息
+  sensitive-headers: # 覆盖默认敏感头信息
+### Hystrix 配置
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 5000
+ribbon:
+  ConnectTimeout: 1000
+  ReadTimeout: 3500
+  MaxAutoRetries: 0
+  MaxAutoRetriesNextServer: 0
+## jwt配置
+leyou:
+  jwt:
+    pubKeyPath: /Users/liguoliang/Desktop/test/rsa.pub # 公钥地址
+    cookieName: LY_TOKEN
+  filter: # 白名单
+    allowPaths:
+      - /api/auth
+      - /api/search
+      - /api/user/register
+      - /api/user/check
+      - /api/user/code
+      - /api/item

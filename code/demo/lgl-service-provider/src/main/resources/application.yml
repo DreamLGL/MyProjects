@@ -1,0 +1,23 @@
+## 端口号
+server:
+  port: 8081
+## 项目名称
+spring:
+  application:
+    name: lgl-service-provider
+  datasource:
+    url: jdbc:mysql://192.168.3.34:3306/yun6
+    username: root
+    password: Cy520==1314
+## 实体类包
+mybatis:
+  type-aliases-package: cn.lgl.service.pojo
+## eureka配置
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:10086/eureka,http://127.0.0.1:10087/eureka,http://127.0.0.1:10088/eureka
+    register-with-eureka: true # 服务提供方,会检测该参数是否为true,true-注册给eureka(是否注册到eureka服务中心,默认为true)
+  instance:
+    lease-expiration-duration-in-seconds: 15 #过期间隔时间,默认为90s
+    lease-renewal-interval-in-seconds: 5 #心跳间隔时间,默认为30s

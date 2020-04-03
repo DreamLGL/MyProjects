@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <introduce :title="msg"></introduce>
+    <for-component :items="lessons"></for-component>
+</div>
+
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    //定义全局组件
+    Vue.component("counter", {
+        template: "<button @click='count++' v-text='textHander+count+\"次\"'></button>",
+        data() {
+            return {
+                count: 0,
+                textHander: '点我试试,我记住你了,点了我'
+            }
+        }
+    })
+    //局部组件
+    const introduce = {
+        template: "<h1 v-text='title'></h1>",
+        props: ['title']
+    }
+    const forComponent = {
+        template: "<ul><li v-for='item in items' v-text='item'></li></ul>",
+        props: {
+            items:{
+                type: Array,
+                default:['value1','value2','value3']
+            }
+        }
+    }
+    const app = new Vue({
+        el: "#app",//element,vue作用的标签
+        data: {
+            msg: "大家好,我是渣渣辉!",
+            lessons: ["Java", "Python", "IOS", "Android", "PHP"]
+        },
+        components: {
+            introduce,
+            forComponent
+        }
+    });
+</script>
+</body>
+</html>

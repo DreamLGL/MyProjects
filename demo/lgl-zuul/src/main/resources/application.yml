@@ -1,0 +1,28 @@
+## 端口号
+server:
+  port: 10010
+## 服务名称
+spring:
+  application:
+    name: lgl-zuul
+## 网关的路由配置
+zuul:
+  routes:
+    lgl-service-provider: /lgl-service-provider/** # 路由名称,可以随便写,习惯上写服务名
+      # path: /lgl-service-provider/** # 这里是映射路径
+      # url: http://localhost:8081 # 映射路径对应的实际url地址(没有引用eureka的配置)
+      # serviceId: lgl-service-provider #映射对应的服务名称(引用了eureka过后的配置)
+  prefix: /api
+## eureka配置
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:10086/eureka,http://127.0.0.1:10087/eureka,http://127.0.0.1:10088/eureka
+## 熔断设置
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 6000 # 设置hystrix的超时时间为6000ms

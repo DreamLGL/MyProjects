@@ -1,0 +1,24 @@
+## 端口号
+server:
+  port: 8088
+## 微服务名称
+spring:
+  application:
+    name: cart-service
+  redis: # redis连接信息
+    host: 192.168.3.34
+    port: 6379
+## eureka配置
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:10086/eureka # 注册中心
+    registry-fetch-interval-seconds: 10 # 获取服务列表时间
+  instance:
+    lease-renewal-interval-in-seconds: 5 # 心跳时间
+    lease-expiration-duration-in-seconds: 30 # 过期时间
+## jwt配置
+leyou:
+  jwt:
+    pubKeyPath: /Users/liguoliang/Desktop/test/rsa.pub # 公钥地址
+    cookieName: LY_TOKEN

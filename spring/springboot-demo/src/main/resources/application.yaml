@@ -1,0 +1,24 @@
+server:
+  port: 8088
+  servlet:
+    path: /
+logging:
+  level:
+    com.lgl: debug
+    # org.springframework: debug
+
+##整合连接池
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.3.34:3306/yun6
+    username: root
+    password: Cy520==1314
+
+##整合mybatis
+mybatis:
+  ##引入mybatis通用mapper后会默认开启驼峰命名就不用在配置
+  ##configuration:
+    ##map-underscore-to-camel-case: true
+  ##mapper-locations:
+  type-aliases-package: com.lgl.pojo

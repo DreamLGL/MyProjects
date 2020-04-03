@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <counter :num1="num" :title="0" @incr1="incr()"></counter>
+    <br>
+    <hello1></hello1>
+</div>
+</body>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    Vue.component("counter", {
+        template: "<button @click='subIncr'>组件测试<span v-text='num1'></span>,<span v-text='title'></span></button>",
+        props: {
+            num1: {
+                type: Number,
+                default: 0
+            },
+            title: {
+                type: Number,
+                default: 0
+            }
+        },
+        methods: {
+            subIncr() {
+                this.$emit("incr1");
+            }
+        }
+    })
+    const hello = {
+        template: "<div>打个招呼:我是<span v-text='name'></span></div>",
+        data() {
+            return {
+                name: "张学友"
+            };
+        }
+    }
+    const app = new Vue({
+        el: "#app",
+        data: {
+            num: 0
+        },
+        components: {
+            hello1: hello
+        },
+        methods: {
+            incr() {
+                this.num++;
+            }
+        }
+    })
+</script>
+</html>

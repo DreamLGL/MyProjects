@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <counter></counter>
+    <Counter2></Counter2>
+</div>
+
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    //定义全局组件
+    Vue.component("counter", {
+        template: "<button @click='count++' v-text='textHander+count+\"次\"'></button>",
+        data() {
+            return {
+                count: 0,
+                textHander: '点我试试,我记住你了,点了我'
+            }
+        }
+    })
+    //局部组件
+    const counter2 ={
+        template: "<button @click='count++' v-text='textHander+count+\"次\"'></button>",
+        data() {
+            return {
+                count: 0,
+                textHander: '点我试试,我记住你了,点了我'
+            }
+        }
+    }
+    const app = new Vue({
+        el: "#app",//element,vue作用的标签
+        data: {},
+        components:{
+            counter2
+        }
+    });
+</script>
+</body>
+</html>

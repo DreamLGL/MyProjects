@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>解构表达式</title>
+</head>
+<body>
+<script>
+    let arr = [2,5,-10,15];
+    let [x,y] = arr;
+    console.log(y);
+    console.log(x);
+    let [,,a,b] = arr;
+    console.log(a);
+    console.log(b);
+    let [,...aa] = arr;
+    console.log(aa);
+    let p = {name:'jack',age:12,girl:{name:'rose',age: 18}};
+    // let {name,age} = p;
+    // console.log(name);
+    // console.log(age);
+    // let {name:s,age:d} = p;
+    let {girl:{name:s},age:d} = p;
+    console.log(s);
+    console.log(d);
+    let {...obj} = p;
+    console.log(obj)
+</script>
+</body>
+</html>

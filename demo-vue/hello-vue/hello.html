@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    .active {
+        display: none;
+    }
+</style>
+<body>
+<!-- Vue对象的html模板 -->
+<div id="app">
+    <!--  双向绑定,v-model:数据模型  -->
+    <input type="text" v-model="number">
+    <hr>
+    <h1>大家好,我是<span v-text="name"></span>,有<span v-text="sum()"></span>位妹子迷恋我</h1>
+    <hr>
+    <!-- v-on:事件名=js表达式;简写click事件为@click -->
+    <button @click="incr">+</button>
+    <button @click="rdc">-</button>
+    <hr>
+    <input type="checkbox" value="IOS" v-model="language">IOS<br>
+    <input type="checkbox" value="JAVA" v-model="language">JAVA<br>
+    <input type="checkbox" value="PHP" v-model="language">PHP<br>
+    <h3>你选择了:<span v-text="language.join(',')"></span></h3>
+    <hr>
+    <input type="button" value="右击事件并阻止默认事件" @contextmenu.prevent="testContextMenu">
+    <hr>
+    <ul>
+        <li v-if="user.gender=='男'" v-for="(user,index) in users" :key="index"><span v-text="index+1"></span>-<span
+                v-text="user.name"></span>-<span
+                v-text="user.gender"></span>-<span
+                v-text="user.age"></span></li>
+    </ul>
+    <hr>
+    <ul>
+        <li v-for="(val,key,index) in user" :key="index"><span v-text="index+1"></span>.<span v-text="key"></span>:<span
+                v-text="val"></span></li>
+    </ul>
+    <hr>
+    <span v-if="show">(v-if)show = true</span><br>
+    <span v-show="show">(v-show)show = true</span><br>
+    <input type="button" v-bind:value="value" @click="changeShow"> <span v-text="random"></span><br>
+    <span v-if="random > 0.75">random>0.75</span>
+    <span v-else-if="random > 0.5">random>0.5</span>
+    <span v-else-if="random > 0.25">random>0.25</span>
+    <span v-else>random<=0.25</span>
+    <hr>
+    <input type="text" v-model="store"><br>
+    <input type="button" :class="{active:store > 0}" class="" value="加入购物车">
+    <hr>
+    <div>
+        <span v-text="getDate1"></span>
+    </div>
+    <hr>
+    watch: <input type="text" v-model="search">
+</div>
+</body>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    // 初始化一个vue实例
+    const app = new Vue({
+        el: "#app", //el: element缩写,选择器
+        data: { //定义数据模型
+            name: "刘德华",
+            number: 0,
+            language: [],
+            users: [
+                {name: '柳岩', gender: '女', age: 21},
+                {name: '峰哥', gender: '男', age: 18},
+                {name: '范冰冰', gender: '女', age: 24},
+                {name: '刘亦菲', gender: '女', age: 18},
+                {name: '古力娜扎', gender: '女', age: 25}
+            ],
+            user: {name: '柳岩', gender: '女', age: 21},
+            show: true,
+            random: 0,
+            value: "showChange",
+            store: 0,
+            birthday: 1529032123201, // 毫秒值
+            search: ""
+        },
+        methods: {
+            incr() {
+                this.number++;
+            },
+            rdc() {
+                if (this.number > 0) {
+                    this.number--;
+                }
+            },
+            sum() {
+                return this.number + 10;
+            },
+            testContextMenu() {
+                console.log("测试方法");
+            },
+            changeShow() {
+                this.show = !this.show;
+                this.random = Math.random();
+            },
+            getDate(arg) {
+                var _date = new Date(arg);
+                var _year = _date.getFullYear();
+                var _month = _date.getMonth() + 1;
+                var _day = _date.getDate();
+                return _year + "年" + _month + "月" + _day + "日";
+            }
+        },
+        created() {
+            this.number = 10;
+        },
+        computed:{
+            getDate1() {
+                var _date = new Date(this.birthday);
+                var _year = _date.getFullYear();
+                var _month = _date.getMonth() + 1;
+                var _day = _date.getDate();
+                return _year + "年" + _month + "月" + _day + "日";
+            }
+        },
+        watch:{
+            search(val1,val2){
+                console.log("val1: "+val1);
+                console.log("val2: "+val2);
+            }
+        }
+    })
+</script>
+</html>

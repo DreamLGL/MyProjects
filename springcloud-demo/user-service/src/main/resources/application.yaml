@@ -1,0 +1,37 @@
+server:
+  port: 8081
+  servlet:
+    path: /
+logging:
+  level:
+    com.lgl: debug
+    # org.springframework: debug
+
+##整合连接池
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.3.34:3306/yun6
+    username: root
+    password: Cy520==1314
+  application:
+    name: user-service
+
+##整合mybatis
+mybatis:
+  ##引入mybatis通用mapper后会默认开启驼峰命名就不用在配置
+  ##configuration:
+    ##map-underscore-to-camel-case: true
+  ##mapper-locations:
+  type-aliases-package: com.lgl.user.pojo
+## 注册到eureka
+eureka:
+  client:
+    service-url:
+      ## defaultZone: http://127.0.0.1:10086/eureka,http://127.0.0.1:10087/eureka,http://127.0.0.1:10088/eureka
+      defaultZone: http://127.0.0.1:10086/eureka
+  instance:
+    ## 心跳频率时长(服务续约的间隔)
+    lease-renewal-interval-in-seconds: 30
+    ## 最小的过期时长(服务时效时间)
+    lease-expiration-duration-in-seconds: 90

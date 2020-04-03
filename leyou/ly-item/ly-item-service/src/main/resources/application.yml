@@ -1,0 +1,19 @@
+## 端口号
+server:
+  port: 8081
+## 服务名称
+spring:
+  application:
+    name: ly-item-service
+  datasource:
+    url: jdbc:mysql://192.168.3.34:3306/yun6
+    username: root
+    password: Cy520==1314
+##  配置Eureka
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:10086/eureka
+mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

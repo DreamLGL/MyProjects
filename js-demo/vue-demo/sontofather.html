@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <introduce :num="count" @incr="add" @decr="reduce"></introduce>
+</div>
+
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    //定义全局组件
+    Vue.component("counter", {
+        template: "<button @click='count++' v-text='textHander+count+\"次\"'></button>",
+        data() {
+            return {
+                count: 0,
+                textHander: '点我试试,我记住你了,点了我'
+            }
+        }
+    })
+    //局部组件
+    const introduce = {
+        template: `
+            <div>
+                <button @click="handleAdd">+</button>
+                <button @click="handleReduce">-</button>
+                <h1 v-text="'NUN:'+num"></h1>
+            </div>`,
+        props: ['num'],
+        methods: {
+            handleAdd() {
+                this.$emit('incr')
+            },
+            handleReduce() {
+                this.$emit('decr')
+            }
+        }
+    }
+    const app = new Vue({
+        el: "#app",//element,vue作用的标签
+        data: {
+            count: 0
+        },
+        components: {
+            introduce
+        },
+        methods: {
+            add() {
+                this.count++;
+            },
+            reduce() {
+                this.count--;
+            }
+        }
+    });
+</script>
+</body>
+</html>
